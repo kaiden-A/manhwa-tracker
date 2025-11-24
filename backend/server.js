@@ -24,7 +24,10 @@ app.use(cors({
 }))
 
 mongoose.connect(dbUri)
-        .then(() => console.log('CONNECTED TO DATABASE'))
+        .then(() => {
+            console.log('CONNECTED TO DATABASE')
+            app.listen(PORT , () => console.log(`APP IS LISTENING AT PORT ${PORT}`));
+        })
         .catch((err) => console.log(err))
 
 app.get('/' , (req , res) => {
@@ -33,4 +36,3 @@ app.get('/' , (req , res) => {
 })
 
 app.use('/api' , manhwaRoutes);
-app.listen(PORT , () => console.log(`APP IS LISTENING AT PORT ${PORT}`));
