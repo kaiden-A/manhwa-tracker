@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MenuContext } from "../../context/ToggleContext";
 
-function SideBar({filter , setFilter}){
+function SideBar({filter , setFilter , openForm}){
 
     const {openToggle} = useContext(MenuContext)
 
@@ -10,7 +10,7 @@ function SideBar({filter , setFilter}){
             <aside className={`sidebar ${openToggle ? "active" : ""}`} id="sidebar">
                     <ul className="sidebar-menu">
                         <li><a className="active"><i className="fas fa-home"></i> Dashboard</a></li>
-                        <li><a><i className="fas fa-plus-circle"></i> Add Manhwa</a></li>
+                        <li onClick={openForm}><a><i className="fas fa-plus-circle"></i> Add Manhwa</a></li>
                         <li><a><i className="fas fa-user"></i> Profile</a></li>
                         <li><a><i className="fas fa-cog"></i> Settings</a></li>
                     </ul>

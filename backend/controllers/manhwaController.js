@@ -35,7 +35,7 @@ export const post_manhwa = async (req , res) => {
         }
 
 
-        res.json({success : true , data : newManhwa , msg : 'successfully create manhwa'})
+        res.json({success : true , data : newManhwa , msg : 'successfully Add manhwa'})
 
     }catch(err){
 
@@ -49,13 +49,13 @@ export const update_manhwa = async (req , res) => {
 
     const manhwaId = req.params.id;
 
-    const {name , imgUrl , manhwaUrl , status} = req.body;
+    const {name , imgUrl , manhwaUrl , currentChapter , latestChapter , status} = req.body;
 
     try{
 
         const updManhwa = await Manhwa.findByIdAndUpdate(
             manhwaId,
-            {name , imgUrl , manhwaUrl , status},
+            {name , imgUrl , manhwaUrl , currentChapter , latestChapter , status} ,
             {new :true}
         )
 
@@ -63,7 +63,7 @@ export const update_manhwa = async (req , res) => {
             return res.status(401).json({ error : true , msg :'Fail Update Manhwa'})
         }
 
-        res.json({sucess : true , data : updManhwa })
+        res.json({success : true , msg : "Successfully Update Manhwa", data : updManhwa })
 
     }catch(err){
         console.log(err);

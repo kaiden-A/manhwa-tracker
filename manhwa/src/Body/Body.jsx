@@ -12,6 +12,8 @@ function Body(){
     const [filter , setFilter] = useState("ongoing");
     const [openForm , setOpenForm] = useState(false);
 
+    const [editData , setEditData] = useState(null);
+
 
     useEffect(() => {
 
@@ -54,6 +56,7 @@ function Body(){
             <SideBar
                 filter={filter}
                 setFilter={setFilter}
+                openForm={() => setOpenForm(true)}
             />
 
             <main className="dashboard">
@@ -80,14 +83,19 @@ function Body(){
 
                                 manhwaArray?.map(m => 
                                     <div key={m._id} className="manhwa-card" onClick={() => window.open( `${m?.manhwaUrl}` , "_blanks")}>
-                                        <img src={m?.imgUrl}  alt="Solo Leveling" className="manhwa-cover"/>
+                                        <img src={m?.imgUrl}  alt={m?.name} className="manhwa-cover"/>
                                         <div className="manhwa-info">
                                             <h3 className="manhwa-title">{m?.name}</h3>
                                             <div className="manhwa-chapter">
                                                 <span className="chapter-progress">
                                                     {`Ch. ${m?.currentChapter}/${m?.latestChapter === 0 ? "?" : m?.latestChapter }`}
                                                 </span>
-                                                <button className="update-btn">Update</button>
+                                                <button className="update-btn"
+                                                    onClick={() => {
+                                                        setEditData(m);
+                                                        setOpenForm(true);
+                                                    }}
+                                                >Update</button>
                                             </div>
                                         </div>
                                     </div>
@@ -114,6 +122,7 @@ function Body(){
     <Form
         open={openForm}
         close={() => setOpenForm(false)}
+        editData={editData}
     />
 
     </>
